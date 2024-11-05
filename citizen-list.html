@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>市民管理</title>
+</head>
+<body>
+    <header>
+        <h1>市民管理</h1>
+        <nav>
+            <a href="index.html" class="round-button">ホーム</a>
+            <a href="web-app.html" class="round-button">ウェブアプリ</a>
+            <a href="info.html" class="round-button">情報</a>
+            <a href="contact.html" class="round-button">お問い合わせ</a>
+            <a href="ranking.html" class="round-button">ランキング</a>
+        </nav>
+    </header>
+    <main>
+        <section id="add-citizen-section">
+            <h2>新しい市民を追加</h2>
+            <form id="add-citizen-form">
+                <label for="citizen-name">名前:</label>
+                <input type="text" id="citizen-name" required>
+                <label for="citizen-job">職業:</label>
+                <input type="text" id="citizen-job" required>
+                <button type="submit" class="round-button">追加</button>
+            </form>
+        </section>
+
+        <section id="citizen-list-section">
+            <h2>市民一覧</h2>
+            <ul id="citizen-list">
+                <!-- 市民情報がここに追加される -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ゲームサーバー</p>
+    </footer>
+
+    <script>
+        // 市民情報を保存する関数
+        function saveCitizens() {
+            const citizenList = document.getElementById('citizen-list');
+            const citizens = [];
+            for (let i = 0; i < citizenList.children.length; i++) {
+                const citizenItem = citizenList.children[i];
+                citizens.push({
+                    name: citizenItem.querySelector('.citizen-name').textContent,
+                    job: citizenItem.querySelector('.citizen-job').textContent,
+                });
+            }
+            localStorage.setItem('citizens', JSON.stringify(citizens));
+        }
+
+        // 市民情報を読み込む関数
+        function loadCitizens() {
+            const citizenList = document.getElementById('citizen-list');
+            const citizens = JSON.parse(localStorage.getItem('citizens')) || [];
+            citizens.forEach(item => {
+                addCitizenItem(item.name, item.job);
+            });
+        }
+
+        // 市民情報を追加する関数
+        function addCitizenItem(name, job) {
+            const citizenList = document.getElementById('citizen-list');
+            const newItem = document.createElement('li');
+
+            const nameElement = document.createElement('span');
+            nameElement.textContent = name;
+            nameElement.className = 'citizen-name';
+
+            const jobElement = document.createElement('span');
+            jobElement.textContent = job;
+            jobElement.className = 'citizen-job';
+
+            const editButton = document.createElement('button');
+            editButton.textContent = '編集';
+            editButton.className = 'round-button edit-button';
+            editButton.onclick = function() {
+                // 編集機能: 市民情報の編集
+                const newJob = prompt('新しい職業を入力してください:', job);
+                if (newJob !== null) {
+                    jobElement.textContent = newJob;
+                    saveCitizens(); // 編集後に保存
+                }
+            };
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '削除';
+            deleteButton.className = 'round-button delete-button';
+            deleteButton.onclick = function() {
+                citizenList.removeChild(newItem);
+                saveCitizens(); // 削除後に保存
+            };
+
+            newItem.appendChild(nameElement);
+            newItem.appendChild(jobElement);
+            newItem.appendChild(editButton);
+            newItem.appendChild(deleteButton);
+            citizenList.appendChild(newItem);
+        }
+
+        // 新しい市民を追加するフォームの処理
+        document.getElementById('add-citizen-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('citizen-name');
+            const jobInput = document.getElementById('citizen-job');
+            const name = nameInput.value.trim();
+            const job = jobInput.value.trim();
+
+            if (name && job) {
+                addCitizenItem(name, job);
+                nameInput.value = ''; // フォームをクリア
+                jobInput.value = ''; // フォームをクリア
+                saveCitizens(); // 新しい市民を保存
+            }
+        });
+
+        // ページロード時に市民情報を読み込む
+        document.addEventListener('DOMContentLoaded', loadCitizens);
+    </script>
+</body>
+</html>

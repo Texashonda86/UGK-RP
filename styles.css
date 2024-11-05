@@ -1,0 +1,129 @@
+/* 全体の設定 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(244, 244, 244, 0.8); /* 明るい背景に透過効果 */
+    color: #333; /* テキスト色 */
+}
+
+/* ヘッダーのスタイル */
+header {
+    background-color: rgba(44, 62, 80, 0.9); /* 深い青色に透過効果 */
+    color: #ecf0f1; /* 明るいテキスト色 */
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid rgba(52, 152, 219, 0.7); /* 下線に透過効果 */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3em; /* ヘッダーのフォントサイズ */
+    text-shadow: 2px 2px 0 rgba(41, 128, 185, 0.8), 3px 3px 0 rgba(52, 152, 219, 0.8); /* 3Dテキスト効果 */
+}
+
+/* ナビゲーションメニュー */
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    margin: 0 15px;
+    padding: 10px 15px;
+    background-color: rgba(52, 152, 219, 0.8); /* ボタンの背景色に透過効果 */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(41, 128, 185, 0.8); /* ホバー時の色に透過効果 */
+}
+
+/* メインコンテンツのスタイル */
+main {
+    padding: 20px;
+}
+
+h2 {
+    font-size: 2.5em; /* サブタイトルのサイズ */
+    color: #2980b9; /* サブタイトルの色 */
+    border-bottom: 2px solid rgba(52, 152, 219, 0.7); /* サブタイトルの下線に透過効果 */
+    padding-bottom: 10px;
+    text-shadow: 1px 1px 0 rgba(189, 195, 199, 0.7), 2px 2px 0 rgba(236, 240, 241, 0.7); /* 3Dテキスト効果 */
+}
+
+section {
+    margin-bottom: 40px; /* 各セクションの間隔 */
+}
+
+.rules-container {
+    background-color: rgba(236, 240, 241, 0.9); /* 明るい背景に透過効果 */
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* 影効果 */
+}
+
+.rules-container ul {
+    list-style-type: none; /* リストの点を削除 */
+    padding: 0;
+}
+
+.rules-container li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(189, 195, 199, 0.5); /* リストアイテムの下線に透過効果 */
+}
+
+.rules-container li:last-child {
+    border-bottom: none; /* 最後のアイテムの下線を削除 */
+}
+
+.note {
+    color: #e74c3c; /* 注意書きの色 */
+}
+
+/* フッターのスタイル */
+footer {
+    background-color: rgba(44, 62, 80, 0.9); /* 深い青色に透過効果 */
+    color: #ecf0f1;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* ボタンスタイル */
+.round-button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: rgba(231, 126, 34, 0.8); /* オレンジ色に透過効果 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.round-button:hover {
+    background-color: rgba(211, 84, 0, 0.8); /* ホバー時のオレンジ色に透過効果 */
+}
+
+/* スクロールバックボタン */
+.back-to-top {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.back-to-top a {
+    padding: 10px 20px;
+    background-color: rgba(39, 174, 96, 0.8); /* 緑色に透過効果 */
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.back-to-top a:hover {
+    background-color: rgba(33, 150, 83, 0.8); /* ホバー時の緑色に透過効果 */
+}

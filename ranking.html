@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>ランキング</title>
+</head>
+<body>
+    <header>
+        <h1>ランキング</h1>
+        <nav>
+            <a href="index.html" class="round-button">ホームに戻る</a>
+           
+        </nav>
+    </header>
+    <main>
+        <h2>プレイヤーランキング</h2>
+        <ul id="player-list">
+            <li>プレイヤー1 - ポイント: 1500 <button class="edit-button" onclick="editPlayer(this)">編集</button></li>
+            <li>プレイヤー2 - ポイント: 1200 <button class="edit-button" onclick="editPlayer(this)">編集</button></li>
+            <li>プレイヤー3 - ポイント: 1000 <button class="edit-button" onclick="editPlayer(this)">編集</button></li>
+            <!-- ランキングデータをここに追加 -->
+        </ul>
+
+        <section>
+            <h3>新しいプレイヤーの追加</h3>
+            <form id="add-player-form">
+                <label for="player-name">プレイヤー名:</label>
+                <input type="text" id="player-name" name="player-name" required>
+                <label for="player-points">ポイント:</label>
+                <input type="number" id="player-points" name="player-points" required>
+                <button type="submit" class="round-button">追加</button>
+            </form>
+        </section>
+        
+        <section>
+            <h3>コメント機能</h3>
+            <form id="comment-form">
+                <label for="comment">コメント:</label>
+                <textarea id="comment" name="comment" rows="4" required></textarea>
+                <button type="submit" class="round-button">コメントを投稿</button>
+            </form>
+            <div id="comments-section">
+                <h4>コメント一覧</h4>
+                <ul id="comments-list">
+                    <!-- コメントがここに追加される -->
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h3>検索機能</h3>
+            <form id="search-form">
+                <input type="text" id="search" name="search" placeholder="検索..." required>
+                <button type="submit" class="round-button">検索</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 ゲームサーバー</p>
+    </footer>
+
+    <script>
+        // プレイヤーを追加する機能
+        document.getElementById('add-player-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const playerName = document.getElementById('player-name').value.trim();
+            const playerPoints = document.getElementById('player-points').value;
+
+            if (playerName && playerPoints) {
+                const playerList = document.getElementById('player-list');
+                const newPlayer = document.createElement('li');
+                newPlayer.innerHTML = `${playerName} - ポイント: ${playerPoints} <button class="edit-button" onclick="editPlayer(this)">編集</button>`;
+                playerList.appendChild(newPlayer);
+
+                document.getElementById('add-player-form').reset(); // フォームをリセット
+            }
+        });
+
+        // プレイヤー情報を編集する機能
+        function editPlayer(button) {
+            const playerLi = button.parentElement;
+            const playerInfo = playerLi.firstChild.textContent.split(' - ポイント: ');
+            const playerName = playerInfo[0].trim();
+            const playerPoints = playerInfo[1].trim();
+
+            document.getElementById('player-name').value = playerName;
+            document.getElementById('player-points').value = playerPoints;
+
+            playerLi.remove(); // 編集したプレイヤーをリストから削除
+        }
+
+        // コメント機能
+        document.getElementById('comment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const commentInput = document.getElementById('comment');
+            const commentText = commentInput.value.trim();
+
+            if (commentText) {
+                const commentsList = document.getElementById('comments-list');
+                const newComment = document.createElement('li');
+                newComment.textContent = commentText;
+                commentsList.appendChild(newComment);
+                commentInput.value = ''; // フォームをクリア
+            }
+        });
+
+        // 検索機能（デモ用）
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const searchTerm = document.getElementById('search').value;
+            alert('検索機能は未実装です: ' + searchTerm);
+        });
+    </script>
+</body>
+</html>

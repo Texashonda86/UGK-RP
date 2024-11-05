@@ -1,0 +1,22 @@
+.footer-links, .additional-links {
+    margin: 20px 0;
+}
+
+.link-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* ボタン間の間隔 */
+}
+
+.footer-button {
+    background-color: #f0f0f0; /* ボタンの背景色 */
+    color: #333; /* ボタンのテキスト色 */
+    padding: 10px 15px; /* ボタンの内側の余白 */
+    border-radius: 5px; /* ボタンの角を丸くする */
+    text-decoration: none; /* 下線を消す */
+    transition: background-color 0.3s ease; /* ホバー時のアニメーション */
+}
+
+.footer-button:hover {
+    background-color: #ccc; /* ホバー時の背景色 */
+}

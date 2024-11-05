@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>市民管理アプリ</title>
+</head>
+<body>
+    <header>
+        <h1>市民管理アプリ</h1>
+        <nav>
+            <a href="index.html" class="round-button"><i class="fas fa-home"></i> ホーム</a>
+            <a href="web-app.html" class="round-button"><i class="fas fa-th"></i> ウェブアプリ</a>
+            <a href="info.html" class="round-button"><i class="fas fa-info-circle"></i> 情報</a>
+            <a href="contact.html" class="round-button"><i class="fas fa-envelope"></i> お問い合わせ</a>
+            <a href="ranking.html" class="round-button"><i class="fas fa-trophy"></i> ランキング</a>
+        </nav>
+    </header>
+    <main>
+        <h2>市民の追加</h2>
+        <form id="citizen-form">
+            <input type="hidden" id="edit-index">
+            <label for="citizen-name">名前:</label>
+            <input type="text" id="citizen-name" required>
+            
+            <label for="citizen-role">役職:</label>
+            <input type="text" id="citizen-role" required>
+            
+            <label for="citizen-status">状態:</label>
+            <input type="text" id="citizen-status" required>
+
+            <button type="submit" class="round-button">市民を追加</button>
+        </form>
+
+        <h2>市民リスト</h2>
+        <table id="citizen-list">
+            <thead>
+                <tr>
+                    <th>名前</th>
+                    <th>役職</th>
+                    <th>状態</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 市民データはここに追加されます -->
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        <p>&copy; 2024 ゲームサーバー</p>
+    </footer>
+
+    <script>
+        const citizenForm = document.getElementById('citizen-form');
+        const citizenNameInput = document.getElementById('citizen-name');
+        const citizenRoleInput = document.getElementById('citizen-role');
+        const citizenStatusInput = document.getElementById('citizen-status');
+        const citizenList = document.getElementById('citizen-list').getElementsByTagName('tbody')[0];
+        let editIndex = -1;
+
+        citizenForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = citizenNameInput.value.trim();
+            const role = citizenRoleInput.value.trim();
+            const status = citizenStatusInput.value.trim();
+
+            if (editIndex === -1) {
+                // 新しい市民を追加
+                const newRow = citizenList.insertRow();
+                newRow.insertCell(0).textContent = name;
+                newRow.insertCell(1).textContent = role;
+                newRow.insertCell(2).textContent = status;
+
+                const actionCell = newRow.insertCell(3);
+                const editButton = document.createElement('button');
+                editButton.textContent = '編集';
+                editButton.onclick = () => editCitizen(newRow.rowIndex - 1);
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '削除';
+                deleteButton.onclick = () => deleteCitizen(newRow.rowIndex - 1);
+
+                actionCell.appendChild(editButton);
+                actionCell.appendChild(deleteButton);
+            } else {
+                // 編集中の市民を更新
+                const row = citizenList.rows[editIndex];
+                row.cells[0].textContent = name;
+                row.cells[1].textContent = role;
+                row.cells[2].textContent = status;
+                editIndex = -1; // 編集をリセット
+            }
+
+            // フォームをクリア
+            citizenNameInput.value = '';
+            citizenRoleInput.value = '';
+            citizenStatusInput.value = '';
+        });
+
+        function editCitizen(index) {
+            const row = citizenList.rows[index];
+            citizenNameInput.value = row.cells[0].textContent;
+            citizenRoleInput.value = row.cells[1].textContent;
+            citizenStatusInput.value = row.cells[2].textContent;
+            editIndex = index; // 編集インデックスを設定
+        }
+
+        function deleteCitizen(index) {
+            citizenList.deleteRow(index);
+        }
+    </script>
+</body>
+</html>

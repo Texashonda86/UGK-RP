@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>サーバー情報</title>
+</head>
+<body>
+    <header>
+        <h1>サーバー情報</h1>
+        <nav>
+            <a href="index.html" class="round-button">ホームに戻る</a>
+            <a href="web-app.html" class="round-button">ウェブアプリ</a>
+            <a href="info.html" class="round-button">情報</a>
+            <a href="contact.html" class="round-button">お問い合わせ</a>
+            <a href="ranking.html" class="round-button">ランキング</a>
+        </nav>
+    </header>
+    <main>
+        <section id="server-status">
+            <h2>サーバーステータス</h2>
+            <div id="status">
+                <!-- サーバーのステータスをここに表示 -->
+                <p>サーバーは現在稼働中です。</p>
+            </div>
+            <div id="players">
+                <h3>プレイヤーリスト</h3>
+                <ul id="player-list">
+                    <!-- プレイヤーのリストをここに表示 -->
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 ゲームサーバー</p>
+    </footer>
+
+    <script>
+        // FiveM サーバーから情報を取得する関数
+        async function fetchServerInfo() {
+            try {
+                const response = await fetch('https://hatoyuye26-jlvbdm.users.cfx.re/'); // FiveM サーバーのAPIエンドポイントに置き換える
+                const data = await response.json();
+                displayServerInfo(data);
+            } catch (error) {
+                console.error('サーバー情報の取得に失敗しました:', error);
+                document.getElementById('status').innerHTML = '<p>サーバー情報の取得に失敗しました。</p>';
+            }
+        }
+
+        // サーバー情報を表示する関数
+        function displayServerInfo(data) {
+            const statusElement = document.getElementById('status');
+            const playersElement = document.getElementById('player-list');
+
+            // サーバーの状態を表示
+            statusElement.innerHTML = `<p>サーバー名: ${data.serverName}</p>
+                                       <p>現在のプレイヤー数: ${data.playerCount}/${data.maxPlayers}</p>`;
+
+            // プレイヤーリストを表示
+            data.players.forEach(player => {
+                const playerItem = document.createElement('li');
+                playerItem.textContent = `${player.name} - ID: ${player.id}`;
+                playersElement.appendChild(playerItem);
+            });
+        }
+
+        // ページがロードされたときにサーバー情報を取得
+        document.addEventListener('DOMContentLoaded', fetchServerInfo);
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>市民追加</title>
+</head>
+<body>
+    <div id="background"></div>
+    <header>
+        <h1>市民を追加</h1>
+        <nav>
+            <a href="index.html" class="round-button">ホーム</a>
+            <a href="web-app.html" class="round-button">ウェブアプリ</a>
+            <a href="info.html" class="round-button">情報</a>
+            <a href="service-overview.html" class="round-button">サービス概要</a>
+        </nav>
+    </header>
+    <main>
+        <h2>新しい市民を追加する</h2>
+        <form action="submit-citizen.php" method="POST">
+            <label for="name">名前:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="occupation">職業:</label>
+            <input type="text" id="occupation" name="occupation" required>
+
+            <label for="game-name">ゲーム名:</label>
+            <input type="text" id="game-name" name="game-name" required>
+
+            <button type="submit" class="round-button">追加</button>
+            <button type="button" class="round-button" onclick="window.location.href='citizen-list.html'">キャンセル</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 ゲームサーバー</p>
+    </footer>
+</body>
+</html>
