@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>ゲームサーバー</title>
+</head>
+<body>
+    <div id="background"></div>
+    <header>
+        <div class="header-icon">
+            <i class="fas fa-gamepad"></i> <!-- ゲームアイコン -->
+        </div>
+        <h1>UGK RP ゲームサーバーへようこそ</h1>
+        <nav>
+            <a href="index.html" class="round-button"><i class="fas fa-home"></i> ホーム</a>
+            <a href="web-app.html" class="round-button"><i class="fas fa-th"></i> ウェブアプリ</a>
+            <a href="info.html" class="round-button"><i class="fas fa-info-circle"></i> 情報</a>
+            <a href="contact.html" class="round-button"><i class="fas fa-envelope"></i> お問い合わせ</a>
+            <a href="ranking.html" class="round-button"><i class="fas fa-trophy"></i> ランキング</a>
+        </nav>
+    </header>
+    <main>
+        <h2>最新情報</h2>
+        <p>ここでは最新のニュースやイベントを紹介します。</p>
+
+        <section>
+            <h3>コメント機能</h3>
+            <form id="comment-form">
+                <label for="comment">コメント:</label>
+                <textarea id="comment" name="comment" rows="4" required></textarea>
+                <button type="submit" class="round-button">コメントを投稿</button>
+            </form>
+            <div id="comments-section">
+                <h4>コメント一覧</h4>
+                <ul id="comments-list">
+                    <!-- コメントがここに追加される -->
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h3>検索機能</h3>
+            <form id="search-form">
+                <input type="text" id="search" name="search" placeholder="検索..." required>
+                <button type="submit" class="round-button">検索</button>
+            </form>
+        </section>
+
+        <!-- 各ページへのリンクボタン -->
+        <section>
+            <h3>ページリンク</h3>
+            <div class="button-container">
+                <a href="latest-info.html" class="round-button">最新情報</a>
+                <a href="web-app.html" class="round-button">ウェブアプリ</a>
+                <a href="info.html" class="round-button">情報</a>
+                <a href="contact.html" class="round-button">お問い合わせ</a>
+                <a href="ranking.html" class="round-button">ランキング</a>
+            </div>
+        </section>
+
+        <!-- ホームに戻るボタン -->
+        <div class="back-to-top">
+            <a href="#" id="back-to-top" class="round-button">ホームに戻る</a>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-links">
+            <h4>ページリンク</h4>
+            <div class="link-buttons">
+                <a href="web-app.html" class="footer-button"><i class="fas fa-th"></i> ウェブアプリ</a>
+                <a href="info.html" class="footer-button"><i class="fas fa-info-circle"></i> 情報</a>
+                <a href="contact.html" class="footer-button"><i class="fas fa-envelope"></i> お問い合わせ</a>
+                <a href="ranking.html" class="footer-button"><i class="fas fa-trophy"></i> ランキング</a>
+            </div>
+        </div>
+        <div class="additional-links">
+            <h4>その他のリンク</h4>
+            <div class="link-buttons">
+                <a href="https://example.com" class="footer-button" target="_blank">外部リンク1</a>
+                <a href="https://example2.com" class="footer-button" target="_blank">外部リンク2</a>
+                <a href="https://example3.com" class="footer-button" target="_blank">外部リンク3</a>
+            </div>
+        </div>
+        <p>&copy; 2024 ゲームサーバー</p>
+    </footer>
+
+    <script>
+        // コメント機能
+        document.getElementById('comment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const commentInput = document.getElementById('comment');
+            const commentText = commentInput.value.trim();
+
+            if (commentText) {
+                const commentsList = document.getElementById('comments-list');
+                const newComment = document.createElement('li');
+                newComment.textContent = commentText;
+
+                // 削除ボタンを作成
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '削除';
+                deleteButton.className = 'delete-button';
+                deleteButton.onclick = function() {
+                    commentsList.removeChild(newComment); // コメントを削除
+                };
+
+                newComment.appendChild(deleteButton); // コメントに削除ボタンを追加
+                commentsList.appendChild(newComment);
+                commentInput.value = ''; // フォームをクリア
+            }
+        });
+
+        // 検索機能（デモ用）
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const searchTerm = document.getElementById('search').value;
+            alert('検索機能は未実装です: ' + searchTerm);
+        });
+
+        // ホームに戻るボタンの動作
+        document.getElementById('back-to-top').addEventListener('click', function(event) {
+            event.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // スムーズにスクロール
+            });
+        });
+    </script>
+</body>
+</html>
